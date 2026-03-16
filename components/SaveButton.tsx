@@ -1,0 +1,39 @@
+'use client'
+
+import { useState } from 'react'
+
+function HeartIcon({ filled }: { filled: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill={filled ? 'currentColor' : 'none'}
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      style={{ width: 13, height: 13 }}
+    >
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  )
+}
+
+export default function SaveButton({ listingTitle }: { listingTitle: string }) {
+  const [saved, setSaved] = useState(false)
+
+  return (
+    <button
+      className={`card-save${saved ? ' saved' : ''}`}
+      aria-label={saved ? `Poistettu tallennetuista: ${listingTitle}` : `Tallenna kohde: ${listingTitle}`}
+      aria-pressed={saved}
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setSaved((v) => !v)
+      }}
+    >
+      <HeartIcon filled={saved} />
+    </button>
+  )
+}
